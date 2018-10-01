@@ -32,3 +32,37 @@ auto Disk::sanity_check(I blocknum, C *data) -> int {
         throw std::invalid_arguement(what);
     }
 }
+
+/*now make the reading method and write too and in this use sanity check first and then use lseek with the file descriptor and also blocknum times block size to allocate than much space to read as well as the seek set and if its below zero then do sprintf stuff
+also then check with read and with its paramaters and its not block size then also do stuff and then increment reads at the end
+write is the same thing with write
+*/
+auto Disk::read(I blocknum, C *data) -> void {
+    sanity_check(blocknum, data);
+    if(lseek(FileDescriptor, blocknum*BLOCK_SIZE, SEEK_SET) < 0) {
+        char what[BUFSIZ];
+        sprintf(what, BUFSIZ, "Unable to load since it is negative lmao");
+        throw std::runtime_error(what);
+    }
+    if(::read(FileDescriptor, data, BLOCK_SIZE) != BLOCK_SIZE) {
+        char what[BUFSIZ];
+        sprintf(what, BUFSIZ, "Unable to get the block");
+        throw std::runtime_error(what);
+    }
+    Reads++;
+}
+
+auto Disk::write(I blocknum, C *data) -> void {
+    sanity_check(blocknum, data);
+    if(lseek(FileDescriptor, blocknum*BLOCK_SIZE, SEEK_SET) < 0) {
+        char what[BUFSIZ];
+        sprintf(what, BUFSIZ, "Unable to load since it is negative lmao");
+        throw std::runtime_error(what);
+    }
+    if(::write(FileDescriptor, data, BLOCK_SIZE) != BLOCK_SIZE) {
+        char what[BUFSIZ];
+        sprintf(what, BUFSIZ, "Unable to get the block");
+        throw std::runtime_error(what);
+    }
+    Writes++;
+}
