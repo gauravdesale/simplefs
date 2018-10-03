@@ -32,3 +32,4 @@ class FileSystem {
         ssize_t stat(size_t inumber);
         ssize_t read(size_t inumber, char *data, size_t length, size_t offset);
         ssize_t write(size_t inumber, char *data, size_t length, size_t offset);
+}
