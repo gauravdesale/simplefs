@@ -17,7 +17,7 @@ void FileSystem::debug(Disk *disk) {
 bool FileSystem::format(Disk *disk) {
     //write super block
     //clear all other blocks
-    SupperBlock super;
+    SuperBlock super;
     super.MagicNumber = this.MAGIC_NUMBER;
     super.Blocks = this.POINTERS_PER_BLOCK;
     super.InodeBlocks = this.POINTERS_PER_INODE;
@@ -25,4 +25,28 @@ bool FileSystem::format(Disk *disk) {
     remove(POINTERS_PER_BLOCK);
     return true;
 }
+bool FileSystem::mount(Disk *disk) {
+    disk->read(super.Blocks, super.MagicNumber);
+    for(int i = 0; i < super.Blocks; i++) {
+        disk->mount();
+    }
+  BitMap newBit = new BitMap();
+  newBit.FreeMemory();  
 
+}
+class BitMap {
+    public:
+        BitMap::BitMap() {
+            _Data = 0;
+            _Width = 0;
+            _Height = 0;
+        }
+        Bitmap::FreeMemory() {
+            if(_Data) {
+                detele[] data;
+            }
+            _Data = NULL:
+            _Width = NULL;
+            _Height = NULL;
+        }
+};
