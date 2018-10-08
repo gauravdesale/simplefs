@@ -50,3 +50,17 @@ class BitMap {
             _Height = NULL;
         }
 };
+
+ssize_t create() {
+    //locate free inode in inode table
+    //record free node 
+    Block blocks;
+    ssize_t returnVal;
+    for(ssize_t i = 0; i < POINTERS_PER_BLOCK; i++) {
+         if(blocks.Inodes[i] == NULL) {
+            returnVal = i;
+            break;
+         }
+    }
+   return returnVal;
+}
