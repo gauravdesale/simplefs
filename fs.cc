@@ -64,3 +64,13 @@ ssize_t create() {
     }
    return returnVal;
 }
+
+ssize_t FileSystem::stat(size_t inumber) {
+    //load inone information 
+    uint32_t loadInfo = (uint32_t) inumber;
+    Inode newNode;
+    newNode.Valid = loadInfo;
+    newNode.Size = loadInfo;
+    newNode.Indirect = loadInfo;
+    return 0;
+}
