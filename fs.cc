@@ -74,3 +74,14 @@ ssize_t FileSystem::stat(size_t inumber) {
     newNode.Indirect = loadInfo;
     return 0;
 }
+
+ssize_t write(size_t inumber, char *data, size_t length, size_t offset) {
+    //load inode 
+    //write block and copy data
+    Inode newNode;
+    newNode.size = inumber;
+    newNode.length = length;
+    newNode.indirect = length + offset;
+    newNode.Direct = data;
+    return 0;
+}
